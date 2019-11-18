@@ -22,7 +22,7 @@
             <property name="useInformationSchema" value="true"/>
         </jdbcConnection>-->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://mysql.gpmall.com:3306/gpmall"
+                        connectionURL="jdbc:mysql://127.0.0.1:3306/gpmall"
                         userId="root"
                         password="123">
             <property name="useInformationSchema" value="true"/>

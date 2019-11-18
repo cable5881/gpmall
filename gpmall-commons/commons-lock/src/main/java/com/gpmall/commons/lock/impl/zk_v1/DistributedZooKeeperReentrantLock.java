@@ -21,7 +21,7 @@ import java.util.concurrent.TimeUnit;
  * 使用配置方式:
  * lock:
  *   zookeeper:
- *     zkHosts: zookeeper://zk.gpmall.com:2181,zookeeper://zk.gpmall.com:2181
+ *     zkHosts: zookeeper://127.0.0.1:2181,zookeeper://127.0.0.1:2181
  *     sessionTimeout: 30000;
  *     connectionTimeout: 30000;
  *     ## 共享一个zk链接
