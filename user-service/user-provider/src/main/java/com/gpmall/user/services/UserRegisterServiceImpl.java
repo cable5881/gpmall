@@ -51,11 +51,11 @@ public class UserRegisterServiceImpl implements IUserRegisterService {
             Member member = new Member();
             member.setUsername(request.getUserName());
             member.setPassword(DigestUtils.md5DigestAsHex(request.getUserPwd().getBytes()));
-
             member.setState(1);
             member.setCreated(new Date());
             member.setUpdated(new Date());
-            member.setIsVerified("N");//为激活
+            //为激活
+            member.setIsVerified("N");
             member.setEmail(request.getEmail());
             if (memberMapper.insert(member) != 1) {
                 response.setCode(SysRetCodeConstants.USER_REGISTER_FAILED.getCode());
@@ -65,12 +65,14 @@ public class UserRegisterServiceImpl implements IUserRegisterService {
             //插入用户验证表
             UserVerify userVerify = new UserVerify();
             userVerify.setUsername(member.getUsername());
-            String key = member.getUsername()+member.getPassword()+UUID.randomUUID().toString();
+            String key = member.getUsername() + member.getPassword() + UUID.randomUUID().toString();
             userVerify.setUuid(DigestUtils.md5DigestAsHex(key.getBytes()));
-            userVerify.setIsExpire("N");//注册信息是否过期
-            userVerify.setIsVerify("N");//是否验证成功
+            //注册信息是否过期
+            userVerify.setIsExpire("N");
+            //是否验证成功
+            userVerify.setIsVerify("N");
             userVerify.setRegisterDate(new Date());
-            if(userVerifyMapper.insert(userVerify)!=1){
+            if (userVerifyMapper.insert(userVerify) != 1) {
                 response.setCode(SysRetCodeConstants.USER_REGISTER_VERIFY_FAILED.getCode());
                 response.setMsg(SysRetCodeConstants.USER_REGISTER_VERIFY_FAILED.getMessage());
                 return response;
@@ -79,9 +81,9 @@ public class UserRegisterServiceImpl implements IUserRegisterService {
             response.setMsg(SysRetCodeConstants.SUCCESS.getMessage());
             //发送消息到KafKa 目前由于发送邮件激活
             Map map = new HashMap();
-            map.put("username",userVerify.getUsername());
-            map.put("key",userVerify.getUuid());
-            map.put("email",member.getEmail());
+            map.put("username", userVerify.getUsername());
+            map.put("key", userVerify.getUuid());
+            map.put("email", member.getEmail());
             kafKaRegisterSuccProducer.sendRegisterSuccInfo(map);
         } catch (Exception e) {
             log.error("UserLoginServiceImpl.register Occur Exception :" + e);

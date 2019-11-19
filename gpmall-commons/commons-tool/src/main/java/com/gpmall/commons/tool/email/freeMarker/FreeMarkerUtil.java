@@ -3,12 +3,10 @@ package com.gpmall.commons.tool.email.freeMarker;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
-import freemarker.template.utility.Constants;
-import jodd.io.FileUtil;
-import org.springframework.boot.autoconfigure.freemarker.FreeMarkerAutoConfiguration;
-import org.springframework.util.FileCopyUtils;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.StringWriter;
 import java.util.Map;
 
 /**
@@ -24,10 +22,10 @@ public class FreeMarkerUtil {
         Configuration configuration = new Configuration();
         //获取class下面的模板文件
         configuration.setDirectoryForTemplateLoading(new File(FreeMarkerUtil.class.getClass().getResource(
-               "/"+templatePath).getPath()));
-        Template template = configuration.getTemplate(filename,"utf-8");
+                "/" + templatePath).getPath()));
+        Template template = configuration.getTemplate(filename, "utf-8");
         StringWriter out = new StringWriter();
-        template.process(datas,out);
+        template.process(datas, out);
         return out.toString();
     }
 }

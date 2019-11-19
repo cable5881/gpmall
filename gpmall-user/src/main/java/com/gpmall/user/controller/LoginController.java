@@ -47,12 +47,13 @@ public class LoginController {
 
     @Anoymous
     @PostMapping("/login")
-    public ResponseData login(@RequestBody Map<String,String> map,
-                              HttpServletRequest request,HttpServletResponse response){
-        UserLoginRequest loginRequest=new UserLoginRequest();
+    public ResponseData login(@RequestBody Map<String, String> map,
+                              HttpServletRequest request,
+                              HttpServletResponse response) {
+        UserLoginRequest loginRequest = new UserLoginRequest();
         loginRequest.setPassword(map.get("userPwd"));
         loginRequest.setUserName(map.get("userName"));
-        String captcha=map.get("captcha");
+        String captcha = map.get("captcha");
 
         if (captchaFlag) {
             KaptchaCodeRequest kaptchaCodeRequest = new KaptchaCodeRequest();
@@ -64,29 +65,29 @@ public class LoginController {
                 return new ResponseUtil<>().setErrorMsg(kaptchaCodeResponse.getMsg());
             }
         }
-        UserLoginResponse userLoginResponse=iUserLoginService.login(loginRequest);
-        if(userLoginResponse.getCode().equals(SysRetCodeConstants.SUCCESS.getCode())) {
-            Cookie cookie=CookieUtil.genCookie(TokenIntercepter.ACCESS_TOKEN,userLoginResponse.getToken(),"/",24*60*60);
+        UserLoginResponse userLoginResponse = iUserLoginService.login(loginRequest);
+        if (userLoginResponse.getCode().equals(SysRetCodeConstants.SUCCESS.getCode())) {
+            Cookie cookie = CookieUtil.genCookie(TokenIntercepter.ACCESS_TOKEN, userLoginResponse.getToken(), "/", 24 * 60 * 60);
             cookie.setHttpOnly(true);
             response.addCookie(cookie);
-         return new ResponseUtil().setData(userLoginResponse);
+            return new ResponseUtil().setData(userLoginResponse);
         }
         return new ResponseUtil().setErrorMsg(userLoginResponse.getMsg());
     }
 
     @GetMapping("/login")
-    public ResponseData checkLogin(HttpServletRequest request){
-        String userInfo=(String)request.getAttribute(TokenIntercepter.USER_INFO_KEY);
-        Object object=JSON.parse(userInfo);
+    public ResponseData checkLogin(HttpServletRequest request) {
+        String userInfo = (String) request.getAttribute(TokenIntercepter.USER_INFO_KEY);
+        Object object = JSON.parse(userInfo);
         return new ResponseUtil().setData(object);
     }
 
     @GetMapping("/loginOut")
-    public ResponseData loginOut(HttpServletRequest request,HttpServletResponse response){
+    public ResponseData loginOut(HttpServletRequest request, HttpServletResponse response) {
         Cookie[] cookies = request.getCookies();
-        if (null!=cookies) {
-            for(Cookie cookie : cookies){
-                if(cookie.getName().equals(TokenIntercepter.ACCESS_TOKEN)){
+        if (null != cookies) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals(TokenIntercepter.ACCESS_TOKEN)) {
                     cookie.setValue(null);
                     cookie.setMaxAge(0);// 立即销毁cookie
                     cookie.setPath("/");
@@ -98,9 +99,8 @@ public class LoginController {
     }
 
 
-
     @GetMapping("/uploadImages")
-    public ResponseData uploadHead(){
+    public ResponseData uploadHead() {
         //TODO
         return new ResponseUtil<>().setData(null);
     }
