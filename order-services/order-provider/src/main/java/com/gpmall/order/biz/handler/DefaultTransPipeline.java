@@ -2,9 +2,7 @@ package com.gpmall.order.biz.handler;/**
  * Created by mic on 2019/8/2.
  */
 
-import com.gpmall.commons.tool.exception.BizException;
 import com.gpmall.order.biz.context.TransHandlerContext;
-import com.gpmall.order.constant.OrderRetCode;
 import lombok.extern.slf4j.Slf4j;
 
 /**

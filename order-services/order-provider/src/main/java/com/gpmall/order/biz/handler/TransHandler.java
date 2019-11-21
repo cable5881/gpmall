@@ -2,7 +2,6 @@ package com.gpmall.order.biz.handler;/**
  * Created by mic on 2019/8/2.
  */
 
-import com.gpmall.order.biz.callback.TransCallback;
 import com.gpmall.order.biz.context.TransHandlerContext;
 
 /**
