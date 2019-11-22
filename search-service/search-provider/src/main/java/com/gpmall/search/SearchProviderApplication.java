@@ -1,4 +1,4 @@
-package com.gpmall.search.bootstrap;
+package com.gpmall.search;
 
 
 import org.springframework.boot.SpringApplication;

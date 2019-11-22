@@ -1,4 +1,4 @@
-package com.gpmall.shopping.gpmallshopping;
+package com.gpmall.shopping;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

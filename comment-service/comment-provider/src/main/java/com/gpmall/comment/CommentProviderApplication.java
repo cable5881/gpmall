@@ -1,4 +1,4 @@
-package com.gpmall.comment.bootstrap;
+package com.gpmall.comment;
 
 import tk.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
