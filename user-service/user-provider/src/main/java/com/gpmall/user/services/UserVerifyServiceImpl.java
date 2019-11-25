@@ -24,58 +24,67 @@ import java.util.List;
 @Service
 @Slf4j
 public class UserVerifyServiceImpl implements IUserVerifyService {
+
     @Autowired
     MemberMapper memberMapper;
     @Autowired
     UserVerifyMapper userVerifyMapper;
+
     @Override
-    public UserVerifyResponse verifyMemer(UserVerifyRequest request) {
+    public UserVerifyResponse verifyMember(UserVerifyRequest request) {
         UserVerifyResponse response = new UserVerifyResponse();
         try {
             request.requestCheck();
-            Example example = new Example(Member.class);
-            example.createCriteria().andEqualTo("state",1)
-                    .andEqualTo("username",request.getUserName());
 
-            List<Member> member = memberMapper.selectByExample(example);
-            if(member==null||member.size()==0) {
+            //查询是否有该用户
+            Example example = new Example(Member.class);
+            example.createCriteria()
+                    .andEqualTo("state", 1)
+                    .andEqualTo("username", request.getUserName());
+            List<Member> members = memberMapper.selectByExample(example);
+            if (members == null || members.size() == 0) {
                 response.setCode(SysRetCodeConstants.USER_INFOR_INVALID.getCode());
                 response.setMsg(SysRetCodeConstants.USER_INFOR_INVALID.getMessage());
                 return response;
             }
+            Member member = members.get(0);
+
             //是否存在注册激活信息
             example.clear();
             example = new Example(UserVerify.class);
-            example.createCriteria().andEqualTo("uuid",request.getUuid());
+            example.createCriteria()
+                    .andEqualTo("uuid", request.getUuid());
             List<UserVerify> userVerifys = userVerifyMapper.selectByExample(example);
-            if(userVerifys==null||userVerifys.size()==0) {
+            if (userVerifys == null || userVerifys.size() == 0) {
                 response.setCode(SysRetCodeConstants.USERVERIFY_INFOR_INVALID.getCode());
                 response.setMsg(SysRetCodeConstants.USERVERIFY_INFOR_INVALID.getMessage());
                 return response;
             }
+
             example.clear();
-            example.createCriteria().andEqualTo("uuid",request.getUuid());
+            example.createCriteria()
+                    .andEqualTo("uuid", request.getUuid());
             UserVerify userVerify = userVerifys.get(0);
             userVerify.setIsVerify("Y");
             //激活用户，修改tb_user_verify的信息 is_verify
-            userVerifyMapper.updateByExample(userVerify,example);
+            userVerifyMapper.updateByExample(userVerify, example);
 
-            //更新Member 表的is_verify
+            //更新Member表的is_verify
             example.clear();
             example = new Example(Member.class);
-            Member member_ = member.get(0);
-            member_.setIsVerified("Y");
-            memberMapper.updateByExample(member_,example);
+            Member updateMb = new Member();
+            updateMb.setId(member.getId());
+            updateMb.setIsVerified("Y");
+            memberMapper.updateByExampleSelective(updateMb, example);
 
             response.setCode(SysRetCodeConstants.SUCCESS.getCode());
             response.setCode(SysRetCodeConstants.SUCCESS.getMessage());
-            return response;
-        }catch (Exception e){
-            log.error(e.getMessage());
-            e.printStackTrace();
-            ExceptionProcessorUtils.wrapperHandlerException(response, e) ;
-            return response;
+        } catch (Exception e) {
+            log.error("active user error", e);
+            ExceptionProcessorUtils.wrapperHandlerException(response, e);
         }
+
+        return response;
     }
 
 }

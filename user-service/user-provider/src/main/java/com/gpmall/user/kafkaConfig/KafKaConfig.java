@@ -59,10 +59,10 @@ public class KafKaConfig {
         Map<String, Object> consumerProperties = kafkaProperties.buildProducerProperties();
         consumerProperties.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaProperties.getBootstrapServers());
         consumerProperties.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
-
         consumerProperties.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
         consumerProperties.put(ConsumerConfig.GROUP_ID_CONFIG, "default");
-        consumerProperties.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, false);//消费者的自动提交方式关闭
+        //消费者的自动提交方式关闭
+        consumerProperties.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, false);
         // consumerProperties.put(ConsumerConfig.MAX_POLL_RECORDS_CONFIG,10);//在一个的轮训方法中，返回的最大记录数
         consumerProperties.put("spring.json.trusted.packages", "com.gpmall.user.dal.entitys,com.gpmall.user.dal.*");
         /*
@@ -83,7 +83,8 @@ public class KafKaConfig {
     public KafkaListenerContainerFactory userRegisterSuccKafkaListenerContainerFactory() {
         ConcurrentKafkaListenerContainerFactory conFactory = new ConcurrentKafkaListenerContainerFactory<>();
         conFactory.setConsumerFactory(kafKaRegisterSuccConsumerFactory());
-        conFactory.getContainerProperties().setAckMode(ContainerProperties.AckMode.MANUAL);//  设置消费者消费消息后的提交方式为手动提交
+        //  设置消费者消费消息后的提交方式为手动提交
+        conFactory.getContainerProperties().setAckMode(ContainerProperties.AckMode.MANUAL);
         return conFactory;
     }
 }

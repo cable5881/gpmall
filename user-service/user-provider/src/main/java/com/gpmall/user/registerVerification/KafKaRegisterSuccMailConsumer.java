@@ -23,6 +23,7 @@ import java.util.Map;
 public class KafKaRegisterSuccMailConsumer {
 
     private final static String topic = "user-register-succ-topic";
+
     private final static String group_id = "mail-group-id";
 
     @Autowired
@@ -33,35 +34,33 @@ public class KafKaRegisterSuccMailConsumer {
 
     /**
      * 指定消费某一个分区
-     * @KafkaListener(id = "",topicPartitions ={@TopicPartition(topic=topic,partitions = {"1"})},containerFactory = "userRegisterSuccKafkaListenerContainerFactory",groupId = group_id)
+     * @TopicPartition(topic=topic,partitions = {"1"})
      */
-    @KafkaListener(id = "",topics = topic,containerFactory = "userRegisterSuccKafkaListenerContainerFactory",groupId = group_id)
-    public void receiveInfo(Map userVerifyMap, Acknowledgment acknowledgment){
+    @KafkaListener(topics = topic, containerFactory = "userRegisterSuccKafkaListenerContainerFactory", groupId = group_id)
+    public void receiveInfo(Map userVerifyMap, Acknowledgment acknowledgment) {
         try {
-            log.info("收到一条注册消息"+userVerifyMap);
+            log.info("收到一条注册消息" + userVerifyMap);
             sendMail(userVerifyMap);
-            acknowledgment.acknowledge();//手动提交消息
-        }catch (Exception e){
-            e.printStackTrace();
+            //手动提交消息
+            acknowledgment.acknowledge();
+        } catch (Exception e) {
+            log.error("Sending email failed", e);
         }
     }
 
-    public void sendMail(Map userVerifyMap){
-        try{
-            MailData mailData = new MailData();
-            mailData.setToAddresss(Arrays.asList((String)userVerifyMap.get("email")));
-            mailData.setSubject(emailConfig.getSubject());
-            mailData.setContent("用户激活邮件");
-            Map<String,Object> viewObj  = new HashMap<>();
-            viewObj.put("url",emailConfig.getUserMailActiveUrl()+"?username="+userVerifyMap.get("username")+"&email="+userVerifyMap.get("key"));
-            viewObj.put("title",emailConfig.getSubject());
-            mailData.setFileName("activeRegisterInfoHtmlTemplate.html");
-            mailData.setDataMap(viewObj);
-            defaultEmailSender.sendHtmlMailUseTemplate(mailData);
-        }catch (Exception e){
-            e.printStackTrace();
-        }finally {
-
-        }
+    public void sendMail(Map userVerifyMap) throws Exception {
+        MailData mailData = new MailData();
+        mailData.setToAddresss(Arrays.asList((String) userVerifyMap.get("email")));
+        mailData.setSubject(emailConfig.getSubject());
+        mailData.setContent("用户激活邮件");
+        Map<String, Object> viewObj = new HashMap<>();
+        String url = emailConfig.getUserMailActiveUrl() + "?username=" + userVerifyMap.get("username")
+                + "&uuid=" + userVerifyMap.get("key");
+        log.info("Email active url={}", url);
+        viewObj.put("url", url);
+        viewObj.put("title", emailConfig.getSubject());
+        mailData.setFileName("activeRegisterInfoHtmlTemplate.html");
+        mailData.setDataMap(viewObj);
+        //defaultEmailSender.sendHtmlMailUseTemplate(mailData);
     }
 }

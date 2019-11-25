@@ -87,7 +87,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.gpmall.user.gpmalluser.GpmallUserApplication</mainClass>
+                    <mainClass>com.gpmall.user.GpmallUserApplication</mainClass>
                 </configuration>
                 <executions>
                     <execution>

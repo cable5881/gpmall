@@ -12,5 +12,5 @@ public interface IUserVerifyService {
      * @param userVerifyRequest
      * @return
      */
-    UserVerifyResponse verifyMemer(UserVerifyRequest userVerifyRequest);
+    UserVerifyResponse verifyMember(UserVerifyRequest userVerifyRequest);
 }

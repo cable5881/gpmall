@@ -82,9 +82,9 @@ email:
   to-addresss:
   cc-addresss:
   username: 13026194611@163.com
-  password: lee@#412771478
+  password: xxx
   mailSmtpAuth: true
   subject: 激活邮件，请点击激活
   content:
   template-path: emailTemplate
-  userMailActiveUrl: http://localhost:9999/gpmall-user/gpuser/verify
+  userMailActiveUrl: http://localhost:8082/user/verify

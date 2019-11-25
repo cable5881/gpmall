@@ -23,8 +23,8 @@ public class UserVerifyRequest extends AbstractRequest {
 
     @Override
     public void requestCheck() {
-        if(StringUtils.isBlank(userName)||StringUtils.isBlank(uuid)){
-            throw new ValidateException(SysRetCodeConstants.REQUEST_CHECK_FAILURE.getCode(),SysRetCodeConstants.REQUEST_CHECK_FAILURE.getMessage());
+        if (StringUtils.isBlank(userName) || StringUtils.isBlank(uuid)) {
+            throw new ValidateException(SysRetCodeConstants.REQUEST_CHECK_FAILURE.getCode(), SysRetCodeConstants.REQUEST_CHECK_FAILURE.getMessage());
         }
     }
 }

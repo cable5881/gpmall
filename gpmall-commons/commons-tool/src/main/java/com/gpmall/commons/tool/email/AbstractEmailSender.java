@@ -60,7 +60,9 @@ public abstract class AbstractEmailSender implements EmailSender {
      */
     @Override
     public void sendHtmlMailUseTemplate(MailData mailData) throws Exception {
+
         initProperties(mailData);
+
         //验证发送的数据
         validatorMailData(mailData);
 

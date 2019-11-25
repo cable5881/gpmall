@@ -85,7 +85,8 @@ public class DefaultEmailSender extends AbstractEmailSender {
     public void doHtmlSend(MailData mailData) throws Exception {
         /**创建一个邮件的会话**/
         Authenticator authenticator = null;
-        if (emailConfig.isMailSmtpAuth()) {//如果需要身份认证，则创建一个密码验证器
+        if (emailConfig.isMailSmtpAuth()) {
+            //如果需要身份认证，则创建一个密码验证器
             authenticator = new Authenticator() {
                 @Override
                 protected PasswordAuthentication getPasswordAuthentication() {
@@ -122,7 +123,8 @@ public class DefaultEmailSender extends AbstractEmailSender {
     public void doSendWithAttachFile(MailData mailData) throws Exception {
         /**创建一个邮件的会话**/
         Authenticator authenticator = null;
-        if (emailConfig.isMailSmtpAuth()) {//如果需要身份认证，则创建一个密码验证器
+        if (emailConfig.isMailSmtpAuth()) {
+            //如果需要身份认证，则创建一个密码验证器
             authenticator = new Authenticator() {
                 @Override
                 protected PasswordAuthentication getPasswordAuthentication() {

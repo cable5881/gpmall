@@ -28,9 +28,7 @@ public class KafKaRegisterSuccProducer {
         try {
             kafkaTemplate.send(topic, uerVerifyMap);
         } catch (Exception e) {
-            log.error(e.getMessage());
-            e.printStackTrace();
+            log.error("Kafka sending msg failed", e);
         }
-
     }
 }
