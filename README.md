@@ -1,17 +1,3 @@
-![1566284996878](README.assets/1566284996878.png)
-
-[![license](https://img.shields.io/hexpm/l/plug.svg?style=flat-square)](https://github.com/2227324689/ToBeBetter/blob/master/LICENSE) [![issues](https://img.shields.io/bitbucket/issues-raw/2227324689/ToBeBetter.svg?style=flat-square)](https://github.com/2227324689/gpmall/issues) [![constract us](https://img.shields.io/badge/contract%20us-%E5%AE%98%E7%BD%91-brightgreen.svg?style=flat-square)](https://www.gupaoedu.com) [![origin](https://img.shields.io/badge/origin-%E5%92%95%E6%B3%A1%E5%AD%A6%E9%99%A2-yellowgreen.svg?style=flat-square)](https://www.gupaoedu.com) [![blog](https://img.shields.io/badge/blog-%E5%8D%9A%E5%AE%A2-orange.svg?style=flat-square)](https://istio.tech) [![author](https://img.shields.io/badge/author-Mic-blue.svg?style=flat-square)](#) [![Gpmall](https://img.shields.io/badge/linked-gpmall-red.svg?style=flat-square)](#) ![hits](http://hits.dwyl.io/gpmall/gpmall.svg?style=flat-square) [![community](https://img.shields.io/badge/community-%E6%8A%80%E6%9C%AF%E7%A4%BE%E5%8C%BA-lightgrey.svg?style=flat-square)](https://gper.club)
-
-# 咕泡商城- 微服务架构实战
-
-咕泡商城是[咕泡学院](https://www.gupaoedu.com) Java架构课程中，帮助学员对于技术更好落地的一个实战项目，项目基于springboot2.1.6.RELEASE+Dubbo2.7.3 来构建微服务。
-
-业务模块划分，尽量贴合互联网公司的架构体系。所以，除了业务本身的复杂度不是很高之外，整体的架构基本和实际架构相差无几。
-
-但实际上，真实的生产级的项目由于用户量以及业务的复杂度，会变得非常复杂。 所以我们会让更多的人参与进来，从需求、设计、解决方案等方面出发来对项目进行迭代，从而培养出一定的
-
-实际解决方案的经验和能力。
-
 # 应用架构图
 
 ![1565533924343](README.assets/1565533924343.png)
@@ -104,32 +90,6 @@
 
 ![1565861422268](README.assets/1565861422268.png)
 
-
-
-
-
-# 如何贡献
-
-非常欢迎您对Gpmall的开发作出贡献！ 你可以选择以下方式向Gpmall贡献：
-
-- [Github - 发布issue进行问题反馈和建议](https://github.com/2227324689/gpmall/issues)
-- 通过Pull Request提交修复
-- 完善文档
-- 提交产品需求
-
-
-
-# 技术交流及问题解答
-
->  **助理** （一个程序员竟然有助理，不可思议）
-
-|                                                   |                                                   |
-| ------------------------------------------------- | ------------------------------------------------- |
-| ![1565592665627](README.assets/1565592665627.png) | ![1565592704023](README.assets/1565592704023.png) |
-
->  作者的个人博客
-
-http://istio.tech
 
 
 
