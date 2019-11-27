@@ -17,15 +17,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- * Created by oahnus on 2019/8/8
- * 22:34.
- */
 @Slf4j
 @RestController
 @RequestMapping("/shopping")
 @Api(tags = "ProductCateController", description = "商品种类控制层")
 public class ProductCateController {
+
     @Reference(timeout = 3000)
     IProductCateService productCateService;
 

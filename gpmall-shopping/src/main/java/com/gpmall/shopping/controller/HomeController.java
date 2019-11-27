@@ -35,9 +35,9 @@ public class HomeController {
     @Anoymous
     @GetMapping("/navigation")
     @ApiOperation("导航")
-    public ResponseData navigation(){
-        NavListResponse response=contentService.queryNavList();
-        if(response.getCode().equals(ShoppingRetCode.SUCCESS.getCode())) {
+    public ResponseData navigation() {
+        NavListResponse response = contentService.queryNavList();
+        if (response.getCode().equals(ShoppingRetCode.SUCCESS.getCode())) {
             return new ResponseUtil().setData(response.getPannelContentDtos());
         }
         return new ResponseUtil().setErrorMsg(response.getMsg());
@@ -46,9 +46,9 @@ public class HomeController {
     @Anoymous
     @GetMapping("/homepage")
     @ApiOperation("主页")
-    public ResponseData homepage(){
-        HomePageResponse response=iHomeService.homepage();
-        if(response.getCode().equals(ShoppingRetCode.SUCCESS.getCode())) {
+    public ResponseData homepage() {
+        HomePageResponse response = iHomeService.homepage();
+        if (response.getCode().equals(ShoppingRetCode.SUCCESS.getCode())) {
             return new ResponseUtil().setData(response.getPanelContentItemDtos());
         }
         return new ResponseUtil().setErrorMsg(response.getMsg());

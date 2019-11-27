@@ -33,7 +33,7 @@ public class ContentServiceImpl implements IContentService {
 
     @Override
     public NavListResponse queryNavList() {
-        NavListResponse response=new NavListResponse();
+        NavListResponse response = new NavListResponse();
         try {
             Example exampleContent = new Example(PanelContent.class);
             exampleContent.setOrderByClause("sort_order");
@@ -44,9 +44,9 @@ public class ContentServiceImpl implements IContentService {
             response.setPannelContentDtos(contentConverter.panelContents2Dto(pannelContents));
             response.setCode(ShoppingRetCode.SUCCESS.getCode());
             response.setMsg(ShoppingRetCode.SUCCESS.getMessage());
-        }catch (Exception e){
-            log.error("ContentServiceImpl.queryNavList Occur Exception :"+e);
-            ExceptionProcessorUtils.wrapperHandlerException(response,e);
+        } catch (Exception e) {
+            log.error("ContentServiceImpl.queryNavList Occur Exception :" + e);
+            ExceptionProcessorUtils.wrapperHandlerException(response, e);
         }
         return response;
     }

@@ -13,6 +13,7 @@ import java.util.List;
 @Data
 @Table(name = "tb_panel")
 public class Panel implements Serializable {
+
     @Id
     @KeySql(useGeneratedKeys = true)
     private Integer id;

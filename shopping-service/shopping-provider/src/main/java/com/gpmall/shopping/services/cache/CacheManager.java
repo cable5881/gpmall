@@ -19,23 +19,23 @@ public class CacheManager {
     @Autowired
     private RedissonClient redissonClient;
 
-    public String checkCache(String key){
+    public String checkCache(String key) {
         try {
             RBucket rBucket = redissonClient.getBucket(key);
             return rBucket.get().toString();
-        }catch (Exception e){
+        } catch (Exception e) {
             return null;
         }
     }
 
-    public void setCache(String key,String val,int expire){
+    public void setCache(String key, String val, int expire) {
         RBucket rBucket = redissonClient.getBucket(key);
         rBucket.set(val);
         rBucket.expire(expire, TimeUnit.DAYS);
     }
 
-    public void expire(String key,int expire){
+    public void expire(String key, int expire) {
         RBucket rBucket = redissonClient.getBucket(key);
-        rBucket.expire(expire,TimeUnit.DAYS);
+        rBucket.expire(expire, TimeUnit.DAYS);
     }
 }
