@@ -38,7 +38,6 @@ public class TokenIntercepter extends HandlerInterceptorAdapter {
             return true;
         }
         HandlerMethod handlerMethod = (HandlerMethod) handler;
-        Object bean = handlerMethod.getBean();
         if (isAnoymous(handlerMethod)) {
             return true;
         }

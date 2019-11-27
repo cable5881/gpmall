@@ -16,24 +16,34 @@ public class ItemDocument {
 
     @Id
     private Integer id;
+
     @Field(type = FieldType.Text)
     private String image;
+
     @Field(type = FieldType.Long)
     private Integer status;
+
     @Field(type = FieldType.Text, analyzer = "ik_max_word", searchAnalyzer = "ik_max_word")
     private String sell_point;
+
     @Field(type = FieldType.Text, analyzer = "ik_max_word", searchAnalyzer = "ik_max_word")
     private String title;
+
     @Field(type = FieldType.Long)
     private Integer num;
+
     @Field(type = FieldType.Long)
     private Long cid;
+
     @Field(type = FieldType.Date)
     private Date created;
+
     @Field(type = FieldType.Float)
     private Double price;
+
     @Field(type = FieldType.Long)
     private Integer limit_num;
+
     @Field(type = FieldType.Date)
     private Date updated;
 

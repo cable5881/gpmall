@@ -1,17 +1,22 @@
-package com.gpmall.shopping.bootstrap;
+package com.gpmall.pay;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 import tk.mybatis.spring.annotation.MapperScan;
 
-@MapperScan(basePackages = "com.gpmall.shopping.dal")
-@ComponentScan(basePackages = "com.gpmall.shopping")
+/**
+ * @decription 启动类
+ * @author mic
+ * @date 2019年8月8日 15:13:51
+ */
+@ComponentScan(basePackages ={"com.gpmall.pay"})
+@MapperScan(basePackages = "com.gpmall.pay.dal")
 @SpringBootApplication
-public class ShoppingProviderApplication {
+public class PayProviderApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(ShoppingProviderApplication.class, args);
+        SpringApplication.run(PayProviderApplication.class, args);
     }
 
 }

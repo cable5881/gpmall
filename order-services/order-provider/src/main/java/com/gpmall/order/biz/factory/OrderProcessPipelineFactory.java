@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
  * 官网：www.gupaoedu.com
  * 风骚的Mic 老师
  * create-date: 2019/8/2-下午10:52
- *
+ * <p>
  * 构建订单处理链
  */
 @Slf4j
@@ -40,7 +40,7 @@ public class OrderProcessPipelineFactory extends AbstranctTransPipelineFactory<C
 
     @Override
     protected TransHandlerContext createContext() {
-        CreateOrderContext createOrderContext=new CreateOrderContext();
+        CreateOrderContext createOrderContext = new CreateOrderContext();
         return createOrderContext;
     }
 

@@ -1,4 +1,4 @@
-package com.gpmall.order.bootstrap;
+package com.gpmall.order;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

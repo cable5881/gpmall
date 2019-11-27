@@ -111,7 +111,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.gpmall.shopping.bootstrap.ShoppingProviderApplication</mainClass>
+                    <mainClass>com.gpmall.shopping.ShoppingProviderApplication</mainClass>
                 </configuration>
                 <executions>
                     <execution>

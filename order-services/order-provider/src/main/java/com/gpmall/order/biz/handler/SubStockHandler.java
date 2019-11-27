@@ -27,6 +27,7 @@ import java.util.stream.Collectors;
 @Component
 @Slf4j
 public class SubStockHandler extends AbstractTransHandler {
+
 	@Autowired
 	StockMapper stockMapper;
 	@Autowired
@@ -38,7 +39,7 @@ public class SubStockHandler extends AbstractTransHandler {
 	}
 
 	@Override
-	@Transactional
+	@Transactional(rollbackFor = Exception.class)
 	public boolean handle(TransHandlerContext context) {
 		CreateOrderContext createOrderContext = (CreateOrderContext) context;
 		List<CartProductDto> cartProductDtoList = createOrderContext.getCartProductDtoList();

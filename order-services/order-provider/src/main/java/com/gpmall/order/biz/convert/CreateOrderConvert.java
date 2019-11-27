@@ -16,12 +16,12 @@ import com.gpmall.order.dto.CreateOrderResponse;
  * 风骚的Mic 老师
  * create-date: 2019/8/2-下午11:04
  */
-public class CreateOrderConvert implements TransConvert{
+public class CreateOrderConvert implements TransConvert {
 
     @Override
     public TransHandlerContext convertRequest2Ctx(AbstractRequest req, TransHandlerContext context) {
-        CreateOrderRequest createOrderRequest=(CreateOrderRequest)req;
-        CreateOrderContext createOrderContext=(CreateOrderContext) context;
+        CreateOrderRequest createOrderRequest = (CreateOrderRequest) req;
+        CreateOrderContext createOrderContext = (CreateOrderContext) context;
         createOrderContext.setAddressId(createOrderRequest.getAddressId());
         createOrderContext.setCartProductDtoList(createOrderRequest.getCartProductDtoList());
         createOrderContext.setOrderTotal(createOrderRequest.getOrderTotal());
@@ -35,8 +35,8 @@ public class CreateOrderConvert implements TransConvert{
 
     @Override
     public AbstractResponse convertCtx2Respond(TransHandlerContext ctx) {
-        CreateOrderContext createOrderContext=(CreateOrderContext) ctx;
-        CreateOrderResponse createOrderResponse=new CreateOrderResponse();
+        CreateOrderContext createOrderContext = (CreateOrderContext) ctx;
+        CreateOrderResponse createOrderResponse = new CreateOrderResponse();
         createOrderResponse.setOrderId(createOrderContext.getOrderId());
         createOrderResponse.setCode(OrderRetCode.SUCCESS.getCode());
         createOrderResponse.setMsg(OrderRetCode.SUCCESS.getMessage());

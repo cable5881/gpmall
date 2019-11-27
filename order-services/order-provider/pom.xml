@@ -118,7 +118,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.gpmall.order.bootstrap.OrderProviderApplication</mainClass>
+                    <mainClass>com.gpmall.order.OrderProviderApplication</mainClass>
                 </configuration>
                 <executions>
                     <execution>

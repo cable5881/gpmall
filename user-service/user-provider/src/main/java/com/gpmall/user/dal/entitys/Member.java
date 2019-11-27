@@ -1,7 +1,6 @@
 package com.gpmall.user.dal.entitys;
 
 import lombok.Data;
-import lombok.ToString;
 
 import javax.persistence.Column;
 import javax.persistence.Id;
@@ -10,8 +9,8 @@ import java.util.Date;
 
 @Table(name = "tb_member")
 @Data
-@ToString
 public class Member {
+
     @Id
     private Long id;
 
@@ -67,6 +66,5 @@ public class Member {
      */
     @Column(name = "isverified")
     private String isVerified;
-
 
 }
