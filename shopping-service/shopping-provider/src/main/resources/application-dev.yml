@@ -48,3 +48,8 @@ dubbo:
   scan:
     base-packages: com.gpmall.shopping.services
 
+#日志级别
+logging:
+  level:
+    com.gpmall.shopping.dal: debug
+

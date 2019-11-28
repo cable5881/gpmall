@@ -2,12 +2,15 @@ package com.gpmall.comment.dal.entitys;
 
 import lombok.Data;
 
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Date;
-import javax.persistence.*;
 
 @Table(name = "tb_comment")
 @Data
 public class Comment {
+
     /**
      * 商品评论主键
      */
