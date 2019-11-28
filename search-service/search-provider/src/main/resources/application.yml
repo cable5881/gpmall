@@ -1,3 +1,8 @@
+server:
+  port: 8888
+  tomcat:
+    uri-encoding: utf-8
+
 spring:
   profiles:
     active: dev
@@ -7,5 +12,4 @@ spring:
 mybatis:
   mapper-locations: classpath*:com/gpmall/search/dal/persistence/*Mapper.xml"
   type-aliases-package: com.gpmall.search.dal.entitys
-
 

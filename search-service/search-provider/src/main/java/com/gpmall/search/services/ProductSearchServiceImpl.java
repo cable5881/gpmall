@@ -26,9 +26,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * 商品搜索服务类 对商品搜索接口API进行实现
@@ -58,7 +56,7 @@ public class ProductSearchServiceImpl implements ProductSearchService {
         try {
             request.requestCheck();
             //统计搜索热词
-            staticsSearchHotWord(request);
+            countHotWord(request);
             BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
             boolQueryBuilder.must(QueryBuilders.matchQuery("title", request.getKeyword()));
             if (request.getPriceGt() != null) {
@@ -77,14 +75,11 @@ public class ProductSearchServiceImpl implements ProductSearchService {
             if (sort != null) {
                 pageable = new PageRequest(request.getCurrentPage() - 1, pageable.getPageSize(), sort);
             }
-            Iterable<ItemDocument> elasticRes =
-                    productRepository.search(boolQueryBuilder, pageable);
+            Iterable<ItemDocument> elasticRes = productRepository.search(boolQueryBuilder, pageable);
             ArrayList<ItemDocument> itemDocuments = Lists.newArrayList(elasticRes);
-
             List<ProductDto> productDtos = productConverter.items2Dto(itemDocuments);
             response.ok(productDtos);
         } catch (Exception e) {
-            e.printStackTrace();
             log.error("ProductSearchServiceImpl.search Occur Exception :" + e);
             ExceptionProcessorUtils.wrapperHandlerException(response, e);
         }
@@ -98,7 +93,7 @@ public class ProductSearchServiceImpl implements ProductSearchService {
         try {
             request.requestCheck();
             //统计搜索热词
-            staticsSearchHotWord(request);
+            countHotWord(request);
             // 分页
             PageInfo pageInfo = new PageInfo();
             pageInfo.setPageNumber(request.getCurrentPage());
@@ -123,7 +118,7 @@ public class ProductSearchServiceImpl implements ProductSearchService {
      *
      * @param request request
      */
-    private void staticsSearchHotWord(SearchRequest request) {
+    private void countHotWord(SearchRequest request) {
         //搜索词
         String keyword = request.getKeyword();
         if (StringUtils.isNotEmpty(keyword)) {
@@ -133,9 +128,7 @@ public class ProductSearchServiceImpl implements ProductSearchService {
                 scoredSortedSet.addAndGetRank(score + 1.0, keyword);
             } else {
                 scoredSortedSet.addScore(keyword, 1);
-
             }
-
         }
     }
 
@@ -146,10 +139,7 @@ public class ProductSearchServiceImpl implements ProductSearchService {
         SearchResponse response = new SearchResponse();
         try {
             RScoredSortedSet<Object> scoredSortedSet = redissonClient.getScoredSortedSet(getSearchHotWordRedisKey());
-            Object first = scoredSortedSet.first();
-            if (!Objects.isNull(first)) {
-                response.ok(Collections.singletonList(first));
-            }
+            response.ok(new ArrayList(scoredSortedSet.valueRangeReversed(0, 5)));
         } catch (Exception e) {
             log.error("ProductSearchServiceImpl.hotProductKeyword Occur Exception :" + e);
             ExceptionProcessorUtils.wrapperHandlerException(response, e);
