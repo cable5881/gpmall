@@ -1,8 +1,9 @@
 package com.gpmall.shopping.converter;
 
 import com.gpmall.shopping.dal.entitys.Item;
-import com.gpmall.shopping.dto.ProductDetailDto;
+import com.gpmall.shopping.dal.entitys.ItemStatistic;
 import com.gpmall.shopping.dto.ProductDto;
+import com.gpmall.shopping.vo.ItemStatResponse;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
@@ -28,4 +29,6 @@ public interface ProductConverter {
     ProductDto item2Dto(Item item);
 
     List<ProductDto> items2Dto(List<Item> items);
+
+    ItemStatResponse itemStat2Response(ItemStatistic itemStatistic);
 }

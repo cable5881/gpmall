@@ -1,6 +1,7 @@
 package com.gpmall.shopping;
 
 import com.gpmall.shopping.dto.*;
+import com.gpmall.shopping.vo.ItemStatResponse;
 
 /**
  * 腾讯课堂搜索【咕泡学院】
@@ -31,5 +32,12 @@ public interface IProductService {
      * @return
      */
     RecommendResponse getRecommendGoods();
+
+    /**
+     * @author liqibo
+     * @date 2019/11/28 15:52
+     * @description 根据itemId查询商品统计
+     */
+    ItemStatResponse getItemStatById(long id);
 
 }

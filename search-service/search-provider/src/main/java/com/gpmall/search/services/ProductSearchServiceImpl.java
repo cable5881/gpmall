@@ -6,7 +6,7 @@ import com.gpmall.search.ProductSearchService;
 import com.gpmall.search.constant.PageInfo;
 import com.gpmall.search.constant.SearchConstants;
 import com.gpmall.search.converter.ProductConverter;
-import com.gpmall.search.dto.ProductDto;
+import com.gpmall.search.vo.ProductVo;
 import com.gpmall.search.dto.SearchRequest;
 import com.gpmall.search.dto.SearchResponse;
 import com.gpmall.search.entity.ItemDocument;
@@ -31,10 +31,6 @@ import java.util.List;
 /**
  * 商品搜索服务类 对商品搜索接口API进行实现
  * 并对外提供商品搜索服务
- *
- * @author jin
- * @version v1.0.0
- * @Date 2019年8月10日
  */
 @Slf4j
 @Service
@@ -77,8 +73,8 @@ public class ProductSearchServiceImpl implements ProductSearchService {
             }
             Iterable<ItemDocument> elasticRes = productRepository.search(boolQueryBuilder, pageable);
             ArrayList<ItemDocument> itemDocuments = Lists.newArrayList(elasticRes);
-            List<ProductDto> productDtos = productConverter.items2Dto(itemDocuments);
-            response.ok(productDtos);
+            List<ProductVo> productVos = productConverter.items2Dto(itemDocuments);
+            response.ok(productVos);
         } catch (Exception e) {
             log.error("ProductSearchServiceImpl.search Occur Exception :" + e);
             ExceptionProcessorUtils.wrapperHandlerException(response, e);
@@ -103,9 +99,9 @@ public class ProductSearchServiceImpl implements ProductSearchService {
                     productRepository.search(QueryBuilders.matchQuery("title", request.getKeyword()), pageInfo);
 
             ArrayList<ItemDocument> itemDocuments = Lists.newArrayList(elasticRes);
-            List<ProductDto> productDtos = productConverter.items2Dto(itemDocuments);
+            List<ProductVo> productVos = productConverter.items2Dto(itemDocuments);
             response.setTotal(elasticRes.getTotalElements());
-            response.ok(productDtos);
+            response.ok(productVos);
         } catch (Exception e) {
             log.error("ProductSearchServiceImpl.fuzzySearch Occur Exception :" + e);
             ExceptionProcessorUtils.wrapperHandlerException(response, e);

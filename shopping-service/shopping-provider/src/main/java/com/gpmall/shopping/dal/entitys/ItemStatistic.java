@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 /**
  * @author liqibo
@@ -12,7 +13,9 @@ import javax.persistence.Table;
  **/
 @Table(name = "tb_item_stat")
 @Data
-public class ItemStatistic {
+public class ItemStatistic implements Serializable {
+
+    private static final long serialVersionUID = -1186469333835997885L;
 
     @Id
     private Long itemId;

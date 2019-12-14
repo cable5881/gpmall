@@ -1,5 +1,6 @@
 package com.gpmall.search.entity;
 
+import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
@@ -12,6 +13,7 @@ import java.util.Date;
  */
 
 @Document(indexName = "tb_item", type = "doc", shards = 1, replicas = 0)
+@Data
 public class ItemDocument {
 
     @Id
@@ -47,104 +49,16 @@ public class ItemDocument {
     @Field(type = FieldType.Date)
     private Date updated;
 
-    public void setCid(Long cid) {
-        this.cid = cid;
-    }
+    /**浏览记录*/
+    @Field(type = FieldType.Long)
+    private Long pv;
 
-    @Override
-    public String toString() {
-        return "ItemDocument{" +
-                "id=" + id +
-                ", image='" + image + '\'' +
-                ", status=" + status +
-                ", sell_point='" + sell_point + '\'' +
-                ", title='" + title + '\'' +
-                ", num=" + num +
-                ", cid=" + cid +
-                ", created=" + created +
-                ", price=" + price +
-                ", limit_num=" + limit_num +
-                ", updated=" + updated +
-                '}';
-    }
+    /**销量*/
+    @Field(type = FieldType.Long)
+    private Long sales;
 
-    public Integer getId() {
-        return id;
-    }
+    /**评分*/
+    @Field(type = FieldType.Float)
+    private Float score;
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
-
-    public String getSell_point() {
-        return sell_point;
-    }
-
-    public void setSell_point(String sell_point) {
-        this.sell_point = sell_point;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public Integer getNum() {
-        return num;
-    }
-
-    public void setNum(Integer num) {
-        this.num = num;
-    }
-
-    public Date getCreated() {
-        return created;
-    }
-
-    public void setCreated(Date created) {
-        this.created = created;
-    }
-
-    public Double getPrice() {
-        return price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
-    }
-
-    public Integer getLimit_num() {
-        return limit_num;
-    }
-
-    public void setLimit_num(Integer limit_num) {
-        this.limit_num = limit_num;
-    }
-
-    public Date getUpdated() {
-        return updated;
-    }
-
-    public void setUpdated(Date updated) {
-        this.updated = updated;
-    }
 }
